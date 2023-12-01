@@ -1,6 +1,6 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export const Sidebar: React.FC = () => {
   const [showAside, setShowAside] = useState(true);
@@ -21,14 +21,13 @@ export const Sidebar: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch('https://dummyjson.com/products/categories');
+        const res = await fetch("https://dummyjson.com/products/categories");
         const data = await res.json();
         setCategories(data || []);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
@@ -48,11 +47,17 @@ export const Sidebar: React.FC = () => {
               <li
                 key={category}
                 className={`p-5 border-slate-200 rounded-md ${
-                  selectedCategory === category ? 'bg-primary opacity-70' : 'hover:bg-primary hover:opacity-70'
+                  selectedCategory === category
+                    ? "bg-primary opacity-70"
+                    : "hover:bg-primary hover:opacity-70"
                 } shadow-xl`}
               >
                 <button
-                  className={`text-gray-600 ${selectedCategory === category ? 'hover:text-gray-800' : 'hover:text-gray-800'}`}
+                  className={`text-gray-600 ${
+                    selectedCategory === category
+                      ? "hover:text-gray-800"
+                      : "hover:text-gray-800"
+                  }`}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
