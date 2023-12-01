@@ -1,12 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import useFetch from "@/hooks/useFetch";
+import { ApiRoutes } from "@/constants/api";
 
 export const Sidebar: React.FC = () => {
   const [showAside, setShowAside] = useState(true);
-  const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const router = useRouter();
+  const { data } = useFetch<string[]>({
+    path: ApiRoutes.GetAllCategories,
+  });
 
   const handleToggleAside = () => {
     setShowAside(!showAside);
@@ -18,19 +21,6 @@ export const Sidebar: React.FC = () => {
     router.push(`/category/${encodeURIComponent(category)}`);
   };
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch("https://dummyjson.com/products/categories");
-        const data = await res.json();
-        setCategories(data || []);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
-
   return (
     <>
       <button
@@ -40,10 +30,10 @@ export const Sidebar: React.FC = () => {
         Toggle Sidebar
       </button>
       {showAside && (
-        <aside className="bg-gray p-4 sm:block lg:w-64 xl:w-72 mr-auto text-center">
+        <aside className="bg-gray hidden p-4 sm:block lg:w-64 xl:w-72 mr-auto text-center">
           <h2 className="text-lg font-semibold mb-4">Product Categories</h2>
           <ul className="space-y-2">
-            {categories.length > 0 &&  categories.map((category) => (
+            {data?.map((category) => (
               <li
                 key={category}
                 className={`p-5 border-slate-200 rounded-md ${

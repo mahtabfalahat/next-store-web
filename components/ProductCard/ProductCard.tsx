@@ -10,18 +10,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   title,
   description,
   price,
-  rating, 
+  rating,
   brand,
   thumbnail,
 }) => {
-
   return (
     <div
       className="max-w-xs rounded overflow-hidden shadow-lg cursor-pointer transition duration-300 transform hover:shadow-xl hover:scale-105 m-auto"
       style={{ width: "300px", height: "auto" }}
     >
       <div className="relative w-full h-60">
-        <Image src={thumbnail} alt={title} fill objectFit="fill"   priority={true} />
+        <Image src={thumbnail} alt={title} fill objectFit="fill" priority />
       </div>
       <div className="px-6 py-4">
         <p className=" font-bold m-1 text-left">{title}</p>

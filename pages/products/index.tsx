@@ -1,6 +1,10 @@
+// SSR Approch
+
 import { ProductSummary } from "@/@types/product-summary.interface";
 import Pagination from "@/components/Pagination/Pagination";
 import { ProductList } from "@/components/ProductList/ProductList";
+import { AXIOS } from "@/config/axios";
+import { ApiRoutes } from "@/constants/api";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -16,7 +20,6 @@ const Products: NextPage<ProductProps> = ({
   totalPages,
 }): JSX.Element => {
   const router = useRouter();
-
   const handlePageChange = (page: number) => {
     router.push(`/products?page=${page}`);
   };
@@ -27,7 +30,7 @@ const Products: NextPage<ProductProps> = ({
         <h1>Products</h1>
         <hr className="my-12 h-0.5 border-t-0 bg-gray opacity-100 dark:opacity-50" />
       </div>
-      {allProducts !== null && allProducts.length > 0 ? (
+      {allProducts?.length > 0 ? (
         <>
           <ProductList products={allProducts} />
           <Pagination
@@ -47,15 +50,17 @@ export async function getServerSideProps({ query }: any) {
   const page = parseInt(query.page as string) || 1;
   const limit = 10;
   const skip = (page - 1) * limit;
-  const res = await fetch(
-    `https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,description,rating,brand,thumbnail`
+  const res = await AXIOS(
+    ApiRoutes.GetAllProducts.replace("{:skip}", skip.toString()).replace(
+      "{:limit}",
+      limit.toString()
+    )
   );
-  const data = await res.json();
-  const totalPages = Math.floor(data.total / limit);
-
+  const data = res.data?.products;
+  const totalPages = Math.floor(data?.length / limit);
   return {
     props: {
-      allProducts: data.products || null,
+      allProducts: data || null,
       currentPage: page,
       totalPages: totalPages,
     },

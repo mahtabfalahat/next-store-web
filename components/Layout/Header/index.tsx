@@ -1,4 +1,4 @@
-import { TopNavigation } from "./top-navigation";
+import { MenuItems } from "./MenuItems";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button } from "@/components/Button/Button";
@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
             className="items-center justify-between  w-full md:flex md:w-auto md:order-1"
             id="navbar-search"
           >
-            <TopNavigation />
+            <MenuItems />
             <div className="relative mt-3 hidden">
               <input
                 type="text"

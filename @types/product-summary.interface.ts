@@ -11,3 +11,7 @@ export interface ProductSummary {
   thumbnail: string;
   images: string[];
 }
+
+export interface Product {
+  products: ProductSummary[];
+}

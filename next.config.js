@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
-    domains: ['i.dummyjson.com' , "https://dummyjson.com"],
-    loader: 'default',
+    remotePatterns: [
+      {
+        hostname: "i.dummyjson.com",
+      },
+      {
+        hostname: "dummyjson.com",
+      },
+    ],
   },
-}
- 
-module.exports = nextConfig
+};
+
+module.exports = nextConfig;

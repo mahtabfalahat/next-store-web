@@ -10,10 +10,7 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const handlePageChange = (page: number) => {
-    onPageChange(page);
-  };
-
+  const handlePageChange = (page: number) => onPageChange(page);
   return (
     <div className="flex justify-center mt-4">
       {Array.from({ length: totalPages }, (_, index) => (
