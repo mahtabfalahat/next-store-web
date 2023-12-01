@@ -22,7 +22,11 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
 }) => {
   switch (variant) {
     case "primary":
-      return <button className={cs(BaseTheme, PrimaryTheme)} {...rest} />;
+      return (
+        <button className={cs(BaseTheme, PrimaryTheme)} {...rest}>
+          {children}
+        </button>
+      );
     case "secondary":
       return (
         <button className={cs(BaseTheme, SecondaryTheme)} {...rest}>
