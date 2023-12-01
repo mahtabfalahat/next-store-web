@@ -26,9 +26,7 @@ export const Sidebar: React.FC = () => {
       <button
         className="fixed sm:hidden left-0 bg-gray-800 text-black px-3 py-2 rounded-md text-sm font-medium m-4"
         onClick={handleToggleAside}
-      >
-        Toggle Sidebar
-      </button>
+      ></button>
       {showAside && (
         <aside className="bg-gray hidden p-4 sm:block lg:w-64 xl:w-72 mr-auto text-center">
           <h2 className="text-lg font-semibold mb-4">Product Categories</h2>
