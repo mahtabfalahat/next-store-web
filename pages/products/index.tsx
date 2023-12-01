@@ -57,7 +57,7 @@ export async function getServerSideProps({ query }: any) {
     )
   );
   const data = res.data?.products;
-  const totalPages = Math.floor(data?.length / limit);
+  const totalPages = Math.floor(res.data?.total / limit);
   return {
     props: {
       allProducts: data || null,
