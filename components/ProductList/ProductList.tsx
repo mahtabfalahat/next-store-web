@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductSummary } from "@/@types/product-summary.interface";
-import { ProductCard } from "../productCard/productCard";
+import { ProductCard } from "../ProductCard/ProductCard";
 
 type ProductListProps = {
   products: ProductSummary[];

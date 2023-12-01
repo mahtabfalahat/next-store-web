@@ -1,6 +1,6 @@
 import { ProductSummary } from "@/@types/product-summary.interface";
 import Pagination from "@/components/Pagination/Pagination";
-import { ProductList } from "@/components/productList/productList";
+import { ProductList } from "@/components/ProductList/ProductList";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -15,7 +15,6 @@ const Products: NextPage<ProductProps> = ({
   currentPage,
   totalPages,
 }): JSX.Element => {
-  console.log(allProducts);
   const router = useRouter();
 
   const handlePageChange = (page: number) => {
@@ -28,12 +27,18 @@ const Products: NextPage<ProductProps> = ({
         <h1>Products</h1>
         <hr className="my-12 h-0.5 border-t-0 bg-gray opacity-100 dark:opacity-50" />
       </div>
-      <ProductList products={allProducts} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      {allProducts !== null && allProducts.length > 0 ? (
+        <>
+          <ProductList products={allProducts} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
+      ) : (
+        <p>there is no product to show !</p>
+      )}
     </div>
   );
 };
@@ -46,7 +51,7 @@ export async function getServerSideProps({ query }: any) {
     `https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,description,rating,brand,thumbnail`
   );
   const data = await res.json();
-  const totalPages = Math.ceil(data.total / limit);
+  const totalPages = Math.floor(data.total / limit);
 
   return {
     props: {

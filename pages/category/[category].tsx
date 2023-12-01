@@ -1,4 +1,4 @@
-import { ProductList } from "@/components/productList/productList";
+import { ProductList } from "@/components/ProductList/ProductList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,6 @@ const CategoryPage: React.FC = () => {
           `https://dummyjson.com/products/category/${category}`
         );
         const data = await res.json();
-        console.log(data);
         setProducts(data.products || []);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -32,7 +31,14 @@ const CategoryPage: React.FC = () => {
           <h1>{`Products - ${category}`}</h1>
           <hr className="my-12 h-0.5 border-t-0 bg-gray opacity-100 dark:opacity-50" />
         </div>
-        <ProductList products={products} />
+        {/* <ProductList products={products} /> */}
+        {products !== null && products.length > 0 ? (
+        <>
+          <ProductList products={products} />
+        </>
+      ) : (
+        <p>there is no product to show !</p>
+      )}
       </div>
   );
 };

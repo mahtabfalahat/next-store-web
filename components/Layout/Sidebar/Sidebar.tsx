@@ -43,7 +43,7 @@ export const Sidebar: React.FC = () => {
         <aside className="bg-gray p-4 sm:block lg:w-64 xl:w-72 mr-auto text-center">
           <h2 className="text-lg font-semibold mb-4">Product Categories</h2>
           <ul className="space-y-2">
-            {categories.map((category) => (
+            {categories.length > 0 &&  categories.map((category) => (
               <li
                 key={category}
                 className={`p-5 border-slate-200 rounded-md ${

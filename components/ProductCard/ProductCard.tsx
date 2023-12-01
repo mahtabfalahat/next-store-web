@@ -21,7 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       style={{ width: "300px", height: "auto" }}
     >
       <div className="relative w-full h-60">
-        <Image src={thumbnail} alt={title} fill objectFit="fill" />
+        <Image src={thumbnail} alt={title} fill objectFit="fill"   priority={true} />
       </div>
       <div className="px-6 py-4">
         <p className=" font-bold m-1 text-left">{title}</p>
